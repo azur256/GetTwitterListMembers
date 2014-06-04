@@ -1,13 +1,17 @@
 #!/usr/bin/ruby
 require 'twitter'
+require 'pit'
 
-CONSUMER_KEY 		= "YOUR_CONSUMER_KEY"
-CONSUMER_SECRET 	= "YOUR_CONSUMER_SECRET"
-ACCESS_TOKEN 		= "YOUR_ACCESS_TOKEN"
-ACCESS_TOKEN_SECRET = "YOUR_ACCESS_TOKEN_SECRET"
+ENV['EDITOR'] ||= 'vim'
+config = Pit.get('Twitter OAuth Token', :require => { 'consumer_key' => 'Your Consumer Key', 'consumer_secret'  => 'Your Consumer Secret', 'access_token' => 'Your Access Token', 'access_token_secret' => 'Your Access Token Secret', 'screen_name' => 'Your Screen Name', 'list_slug' => 'Target List Slug'})
 
-LIST_OWNER_SCREEN_NAME 	= "YOUR_SCREEN_NAME"
-LIST_SLUG				= "YOUR_LIST_SLUG"
+CONSUMER_KEY 		= config['consumer_key']
+CONSUMER_SECRET 	= config['consumer_secret']
+ACCESS_TOKEN 		= config['access_token']
+ACCESS_TOKEN_SECRET = config['access_token_secret']
+
+LIST_OWNER_SCREEN_NAME 	= config['screen_name']
+LIST_SLUG				= config['list_slug']
 
 def expand_url(url, limit = 5)
 	begin
